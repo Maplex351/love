@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>给你的一封小信件 💌</title>
+<title>给你的一封小信件 🐢</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #f06292 100%);
+  background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 30%, #66bb6a 60%, #43a047 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,8 +19,7 @@ body {
   position: relative;
 }
 
-/* ===== 飘落的爱心 ===== */
-.heart-rain {
+.bubble-rain {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -29,31 +28,31 @@ body {
   overflow: hidden;
 }
 
-.heart {
+.bubble {
   position: absolute;
   top: -40px;
   animation: fall linear infinite;
-  opacity: 0.6;
+  opacity: 0.5;
   font-size: 20px;
 }
 
 @keyframes fall {
-  0%   { transform: translateY(-40px) rotate(0deg); opacity: 0.7; }
+  0%   { transform: translateY(-40px) rotate(0deg); opacity: 0.6; }
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
-/* ===== 主卡片 ===== */
 .card {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   border-radius: 24px;
   padding: 36px 28px 32px;
   max-width: 420px;
   width: 92vw;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(233, 30, 99, 0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;
+  box-shadow: 0 20px 60px rgba(56, 142, 60, 0.2), 0 0 0 1px rgba(255,255,255,0.5) inset;
   animation: cardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  overflow: visible;
 }
 
 @keyframes cardIn {
@@ -61,158 +60,150 @@ body {
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* ===== 小猫容器 ===== */
-.cat-wrap {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 16px;
-  animation: catBounce 2s ease-in-out infinite;
-}
-
-@keyframes catBounce {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
-/* CSS 小猫 */
-.cat-face {
+/* ===== 小乌龟 ===== */
+.turtle-wrap {
+  width: 150px;
+  height: 130px;
+  margin: 0 auto 20px;
   position: relative;
-  width: 100px;
-  height: 90px;
-  background: #ffe0b2;
-  border-radius: 50% 50% 45% 45%;
-  margin: 20px auto 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  animation: turtleBob 2.5s ease-in-out infinite;
 }
 
-/* 耳朵 */
-.cat-face::before, .cat-face::after {
-  content: '';
-  position: absolute;
-  top: -18px;
-  width: 0; height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 28px solid #ffe0b2;
+@keyframes turtleBob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-8px) rotate(2deg); }
 }
-.cat-face::before { left: 6px; transform: rotate(-8deg); }
-.cat-face::after  { right: 6px; transform: rotate(8deg); }
 
-/* 耳朵内侧 */
-.ear-inner-l, .ear-inner-r {
+.shell {
   position: absolute;
-  top: -10px;
-  width: 0; height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 16px solid #ffab91;
-  z-index: 1;
-}
-.ear-inner-l { left: 14px; transform: rotate(-8deg); }
-.ear-inner-r { right: 14px; transform: rotate(8deg); }
-
-/* 眼睛 */
-.eyes {
-  position: absolute;
-  top: 28px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  display: flex;
-  justify-content: space-between;
+  width: 92px;
+  height: 68px;
+  background: linear-gradient(145deg, #8d6e63, #5d4037);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  z-index: 2;
 }
 
-.eye {
-  width: 16px;
-  height: 18px;
-  background: #4e342e;
-  border-radius: 50%;
-  position: relative;
-  animation: blink 3.5s ease-in-out infinite;
-}
-
-.eye::after {
+.shell::before {
   content: '';
   position: absolute;
-  top: 3px; left: 4px;
-  width: 6px; height: 6px;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  width: 52px; height: 36px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+}
+
+.shell::after {
+  content: '';
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 72px; height: 50px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+}
+
+.shell-hex {
+  position: absolute;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  width: 28px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.turtle-head {
+  position: absolute;
+  bottom: 32px;
+  right: 6px;
+  width: 38px;
+  height: 32px;
+  background: #a5d6a7;
+  border-radius: 50% 65% 40% 50%;
+  z-index: 4;
+}
+
+.turtle-eye {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 11px;
+  height: 12px;
+  background: #3e2723;
+  border-radius: 50%;
+  animation: blink 4s ease-in-out infinite;
+}
+
+.turtle-eye::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 3px;
+  width: 4px; height: 4px;
   background: white;
   border-radius: 50%;
 }
 
 @keyframes blink {
-  0%, 45%, 55%, 100% { transform: scaleY(1); }
-  50%                 { transform: scaleY(0.1); }
+  0%, 42%, 52%, 100% { transform: scaleY(1); }
+  47%                { transform: scaleY(0.1); }
 }
 
-/* 鼻子 */
-.nose {
+.turtle-blush {
   position: absolute;
-  top: 48px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10px; height: 8px;
-  background: #ff8a80;
-  border-radius: 50% 50% 40% 40%;
-}
-
-/* 嘴巴 */
-.mouth {
-  position: absolute;
-  top: 54px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 10px;
-}
-
-.mouth::before, .mouth::after {
-  content: '';
-  position: absolute;
-  width: 12px; height: 8px;
-  border-bottom: 2.5px solid #a1887f;
-  border-radius: 0 0 50% 50%;
-  top: 0;
-}
-.mouth::before { left: 0; }
-.mouth::after  { right: 0; }
-
-/* 腮红 */
-.blush-l, .blush-r {
-  position: absolute;
-  top: 44px;
-  width: 18px; height: 12px;
-  background: rgba(255, 138, 128, 0.4);
+  bottom: 7px;
+  right: 3px;
+  width: 11px;
+  height: 7px;
+  background: rgba(239, 154, 154, 0.5);
   border-radius: 50%;
 }
-.blush-l { left: 6px; }
-.blush-r { right: 6px; }
 
-/* 胡须 */
-.whiskers {
+.turtle-smile {
   position: absolute;
-  top: 50px;
-  width: 100%;
+  bottom: 11px;
+  right: 10px;
+  width: 9px;
+  height: 5px;
+  border-bottom: 2px solid #6d4c41;
+  border-radius: 0 0 50% 50%;
 }
 
-.whisker {
+.leg-fl, .leg-fr, .leg-bl, .leg-br {
   position: absolute;
-  width: 24px;
-  height: 1.5px;
-  background: #bcaaa4;
+  width: 22px;
+  height: 15px;
+  background: #a5d6a7;
+  border-radius: 50%;
+  z-index: 1;
+}
+.leg-fl { bottom: 4px; left: 20px; transform: rotate(-15deg); }
+.leg-fr { bottom: 4px; right: 20px; transform: rotate(15deg); }
+.leg-bl { bottom: 0; left: 14px; transform: rotate(-10deg); }
+.leg-br { bottom: 0; right: 14px; transform: rotate(10deg); }
+
+.turtle-tail {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  width: 16px;
+  height: 7px;
+  background: #a5d6a7;
+  border-radius: 50% 20% 20% 50%;
+  transform: rotate(-10deg);
+  z-index: 1;
 }
 
-.whisker-l1 { left: -14px; top: 0; transform: rotate(-8deg); }
-.whisker-l2 { left: -16px; top: 8px; transform: rotate(4deg); }
-.whisker-r1 { right: -14px; top: 0; transform: rotate(8deg); }
-.whisker-r2 { right: -16px; top: 8px; transform: rotate(-4deg); }
-
-/* 爱心 */
-.cat-heart {
+.turtle-heart {
   position: absolute;
-  top: -8px; right: -8px;
-  font-size: 22px;
+  top: 4px; right: 2px;
+  font-size: 20px;
   animation: heartPop 1.2s ease-in-out infinite;
+  z-index: 5;
 }
 
 @keyframes heartPop {
@@ -223,7 +214,7 @@ body {
 /* ===== 文字 ===== */
 .title {
   font-size: 13px;
-  color: #e91e63;
+  color: #2e7d32;
   letter-spacing: 4px;
   margin-bottom: 12px;
   font-weight: 500;
@@ -238,8 +229,7 @@ body {
 }
 
 .question .highlight {
-  color: #e91e63;
-  position: relative;
+  color: #2e7d32;
 }
 
 /* ===== 按钮区 ===== */
@@ -255,7 +245,7 @@ body {
 }
 
 .btn-yes {
-  background: linear-gradient(135deg, #ec407a, #e91e63);
+  background: linear-gradient(135deg, #66bb6a, #388e3c);
   color: white;
   border: none;
   padding: 14px 40px;
@@ -264,7 +254,7 @@ body {
   cursor: pointer;
   font-weight: 600;
   letter-spacing: 2px;
-  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+  box-shadow: 0 6px 20px rgba(56, 142, 60, 0.4);
   transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
@@ -274,7 +264,6 @@ body {
 
 .btn-yes:active {
   transform: scale(0.95);
-  box-shadow: 0 3px 10px rgba(233, 30, 99, 0.4);
 }
 
 .btn-think {
@@ -285,7 +274,7 @@ body {
   font-size: 14px;
   border-radius: 50px;
   cursor: pointer;
-  transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+  transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
   white-space: nowrap;
@@ -297,23 +286,22 @@ body {
   opacity: 0.8;
 }
 
-/* ===== 提示文字 ===== */
 .hint {
-  margin-top: 8px;
+  margin-top: 12px;
   font-size: 12px;
-  color: #ef9a9a;
+  color: #81c784;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
 
 .hint.show { opacity: 1; }
 
-/* ===== 成功页面 ===== */
+/* ===== 成功页 ===== */
 .success-page {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
   z-index: 100;
   display: none;
   flex-direction: column;
@@ -333,31 +321,30 @@ body {
   to   { opacity: 1; }
 }
 
-.success-emoji {
-  font-size: 80px;
+.success-turtle {
+  font-size: 90px;
   animation: successBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 @keyframes successBounce {
-  from { transform: scale(0); }
-  to   { transform: scale(1); }
+  from { transform: scale(0) rotate(-20deg); }
+  to   { transform: scale(1) rotate(0deg); }
 }
 
 .success-title {
-  font-size: 28px;
-  color: #c2185b;
+  font-size: 26px;
+  color: #2e7d32;
   font-weight: 700;
   margin-bottom: 12px;
 }
 
 .success-sub {
   font-size: 16px;
-  color: #e91e63;
+  color: #388e3c;
   line-height: 1.8;
 }
 
-/* 庆祝烟花粒子 */
 .confetti-container {
   position: fixed;
   top: 0; left: 0;
@@ -368,7 +355,6 @@ body {
 
 .confetti {
   position: absolute;
-  width: 10px; height: 10px;
   border-radius: 50%;
   animation: confettiFall 3s ease-out forwards;
 }
@@ -378,7 +364,6 @@ body {
   100% { transform: translateY(100vh) rotate(720deg) scale(0.3); opacity: 0; }
 }
 
-/* ===== 底部 ===== */
 .footer {
   position: fixed;
   bottom: 16px;
@@ -391,89 +376,79 @@ body {
 </head>
 <body>
 
-<!-- 爱心雨 -->
-<div class="heart-rain" id="heartRain"></div>
+<div class="bubble-rain" id="bubbleRain"></div>
 
-<!-- 主卡片 -->
 <div class="card" id="mainCard">
-  <div class="cat-wrap">
-    <div class="cat-face">
-      <div class="ear-inner-l"></div>
-      <div class="ear-inner-r"></div>
-      <div class="eyes">
-        <div class="eye"></div>
-        <div class="eye"></div>
-      </div>
-      <div class="nose"></div>
-      <div class="mouth"></div>
-      <div class="blush-l"></div>
-      <div class="blush-r"></div>
-      <div class="whiskers">
-        <div class="whisker whisker-l1"></div>
-        <div class="whisker whisker-l2"></div>
-        <div class="whisker whisker-r1"></div>
-        <div class="whisker whisker-r2"></div>
-      </div>
-      <div class="cat-heart">❤️</div>
+  <div class="turtle-wrap">
+    <div class="turtle-tail"></div>
+    <div class="leg-bl"></div>
+    <div class="leg-br"></div>
+    <div class="leg-fl"></div>
+    <div class="leg-fr"></div>
+    <div class="shell">
+      <div class="shell-hex"></div>
     </div>
+    <div class="turtle-head">
+      <div class="turtle-eye"></div>
+      <div class="turtle-blush"></div>
+      <div class="turtle-smile"></div>
+    </div>
+    <div class="turtle-heart">💚</div>
   </div>
 
-  <div class="title">—— 来 自 小 猫 的 心 意 ——</div>
+  <div class="title">—— 来 自 小 王 八 的 心 意 ——</div>
   <div class="question">
-    可以成为我的<span class="highlight">恋人</span>吗？
+    可以成为我的<span class="highlight">主人</span>吗？
   </div>
 
   <div class="btn-area" id="btnArea">
-    <button class="btn-yes" onclick="sayYes()">可 以 💕</button>
+    <button class="btn-yes" onclick="sayYes()">可 以 💚</button>
     <button class="btn-think" id="btnThink" onclick="thinkAgain()">要不再想想</button>
   </div>
 
   <div class="hint" id="hint"></div>
 </div>
 
-<!-- 成功页 -->
 <div class="success-page" id="successPage">
   <div class="confetti-container" id="confettiBox"></div>
-  <div class="success-emoji">🥰</div>
-  <div class="success-title">在一起！</div>
+  <div class="success-turtle">🐢</div>
+  <div class="success-title">恭喜你获得一只可爱小乌龟！</div>
   <div class="success-sub">
-    小猫开心得转圈圈～<br>
-    从今天起，你就是我的啦 💕
+    小乌龟开心得翻了个身～<br>
+    它会陪你很久很久的哦 🐢💚
   </div>
 </div>
 
-<div class="footer">with love ♡</div>
+<div class="footer">with love 🐢</div>
 
 <script>
-// ===== 爱心雨 =====
-(function createHeartRain() {
-  var container = document.getElementById('heartRain');
-  var emojis = ['❤️', '💕', '💗', '💖', '🩷', '♥️'];
-  for (var i = 0; i < 20; i++) {
-    var h = document.createElement('div');
-    h.className = 'heart';
-    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    h.style.left = Math.random() * 100 + '%';
-    h.style.animationDuration = (4 + Math.random() * 6) + 's';
-    h.style.animationDelay = Math.random() * 8 + 's';
-    h.style.fontSize = (14 + Math.random() * 16) + 'px';
-    h.style.opacity = 0.3 + Math.random() * 0.5;
-    container.appendChild(h);
+(function createBubbleRain() {
+  var container = document.getElementById('bubbleRain');
+  var emojis = ['🐢', '💚', '🌿', '🍀', '✨', '🫧'];
+  for (var i = 0; i < 18; i++) {
+    var b = document.createElement('div');
+    b.className = 'bubble';
+    b.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    b.style.left = Math.random() * 100 + '%';
+    b.style.animationDuration = (5 + Math.random() * 7) + 's';
+    b.style.animationDelay = Math.random() * 8 + 's';
+    b.style.fontSize = (14 + Math.random() * 16) + 'px';
+    b.style.opacity = 0.3 + Math.random() * 0.4;
+    container.appendChild(b);
   }
 })();
 
-// ===== "要不再想想"按钮逻辑 =====
 var thinkCount = 0;
 var hints = [
   '再想想嘛～ 🥺',
-  '真的不考虑一下？ 😢',
-  '小猫会伤心的哦… 🐱',
-  '你都忍心拒绝吗 💔',
-  '再给个机会吧～ 😿',
-  '按钮都变大了，说明缘分在靠近！',
-  '不点这个了，点上面那个嘛～ 💕',
-  '小猫眼巴巴看着你… 🥹',
-  '快放弃抵抗吧！😸',
+  '真的不带走我吗？ 🐢',
+  '小乌龟会伤心的哦… 💔',
+  '它眼巴巴看着你呢 🥹',
+  '再给个机会吧～ 🍀',
+  '你看"可以"都变大了，缘分到了！',
+  '快点左边那个嘛～ 💚',
+  '小乌龟在等你领养它… 🐢',
+  '快放弃抵抗吧！',
   '最后一次机会咯～'
 ];
 
@@ -481,28 +456,19 @@ function thinkAgain() {
   thinkCount++;
   var yesBtn = document.querySelector('.btn-yes');
   var hint = document.getElementById('hint');
-  var card = document.getElementById('mainCard');
 
-  // 每次点击"再想想"，"可以"按钮实际变大，无上限
   var fontSize = 18 + thinkCount * 4;
   var padV = 14 + thinkCount * 4;
   var padH = 40 + thinkCount * 12;
   yesBtn.style.fontSize = fontSize + 'px';
   yesBtn.style.padding = padV + 'px ' + padH + 'px';
+  yesBtn.style.boxShadow = '0 ' + (6 + thinkCount) + 'px ' + (20 + thinkCount * 4) + 'px rgba(56, 142, 60, ' + Math.min(0.4 + thinkCount * 0.05, 0.8) + ')';
 
-  // "可以"按钮颜色更鲜艳，越来越闪
-  yesBtn.style.boxShadow = '0 ' + (6 + thinkCount) + 'px ' + (20 + thinkCount * 4) + 'px rgba(233, 30, 99, ' + Math.min(0.4 + thinkCount * 0.05, 0.8) + ')';
-
-  // 卡片允许溢出
-  card.style.overflow = 'visible';
-
-  // 显示提示
   var hintIdx = Math.min(thinkCount - 1, hints.length - 1);
   hint.textContent = hints[hintIdx];
   hint.className = 'hint show';
 }
 
-// ===== 点击"可以" =====
 function sayYes() {
   var card = document.getElementById('mainCard');
   card.style.transition = 'all 0.5s ease';
@@ -515,11 +481,9 @@ function sayYes() {
   }, 400);
 }
 
-// ===== 庆祝粒子 =====
 function launchConfetti() {
   var container = document.getElementById('confettiBox');
-  var colors = ['#e91e63', '#ff5722', '#ff9800', '#ffc107', '#4caf50', '#2196f3', '#9c27b0', '#ff4081'];
-
+  var colors = ['#388e3c', '#66bb6a', '#a5d6a7', '#ffc107', '#ff9800', '#4caf50', '#81c784', '#c8e6c9'];
   for (var i = 0; i < 60; i++) {
     (function(index) {
       setTimeout(function() {
@@ -531,12 +495,8 @@ function launchConfetti() {
         c.style.width = (6 + Math.random() * 10) + 'px';
         c.style.height = c.style.width;
         c.style.animationDuration = (2 + Math.random() * 2) + 's';
-        c.style.animationDelay = '0s';
         container.appendChild(c);
-
-        setTimeout(function() {
-          if (c.parentNode) c.parentNode.removeChild(c);
-        }, 4000);
+        setTimeout(function() { if (c.parentNode) c.parentNode.removeChild(c); }, 4000);
       }, index * 50);
     })(i);
   }
