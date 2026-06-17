@@ -479,26 +479,21 @@ var hints = [
 
 function thinkAgain() {
   thinkCount++;
-  var btn = document.getElementById('btnThink');
+  var yesBtn = document.querySelector('.btn-yes');
   var hint = document.getElementById('hint');
   var card = document.getElementById('mainCard');
 
-  // 每次点击，字体和 padding 实际变大，无上限
-  var fontSize = 14 + thinkCount * 4;
-  var padV = 10 + thinkCount * 3;
-  var padH = 24 + thinkCount * 8;
-  btn.style.fontSize = fontSize + 'px';
-  btn.style.padding = padV + 'px ' + padH + 'px';
+  // 每次点击"再想想"，"可以"按钮实际变大，无上限
+  var fontSize = 18 + thinkCount * 4;
+  var padV = 14 + thinkCount * 4;
+  var padH = 40 + thinkCount * 12;
+  yesBtn.style.fontSize = fontSize + 'px';
+  yesBtn.style.padding = padV + 'px ' + padH + 'px';
 
-  // 按钮颜色逐渐变红（表示"危险"）
-  var r = Math.min(180 + thinkCount * 8, 255);
-  var g = Math.max(190 - thinkCount * 15, 100);
-  var b = Math.max(197 - thinkCount * 15, 100);
-  btn.style.color = 'rgb(' + r + ',' + g + ',' + b + ')';
-  btn.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
-  btn.style.borderWidth = Math.min(1.5 + thinkCount * 0.3, 4) + 'px';
+  // "可以"按钮颜色更鲜艳，越来越闪
+  yesBtn.style.boxShadow = '0 ' + (6 + thinkCount) + 'px ' + (20 + thinkCount * 4) + 'px rgba(233, 30, 99, ' + Math.min(0.4 + thinkCount * 0.05, 0.8) + ')';
 
-  // 卡片自动撑大，允许溢出
+  // 卡片允许溢出
   card.style.overflow = 'visible';
 
   // 显示提示
