@@ -49,8 +49,8 @@ body {
   background: rgba(255, 255, 255, 0.92);
   border-radius: 24px;
   padding: 36px 28px 32px;
-  max-width: 360px;
-  width: 88vw;
+  max-width: 420px;
+  width: 92vw;
   text-align: center;
   box-shadow: 0 20px 60px rgba(233, 30, 99, 0.25), 0 0 0 1px rgba(255,255,255,0.5) inset;
   animation: cardIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
@@ -245,18 +245,20 @@ body {
 /* ===== 按钮区 ===== */
 .btn-area {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
-  min-height: 120px;
   justify-content: center;
+  gap: 16px;
+  min-height: 60px;
+  position: relative;
+  overflow: visible;
 }
 
 .btn-yes {
   background: linear-gradient(135deg, #ec407a, #e91e63);
   color: white;
   border: none;
-  padding: 14px 56px;
+  padding: 14px 40px;
   font-size: 18px;
   border-radius: 50px;
   cursor: pointer;
@@ -265,6 +267,9 @@ body {
   box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
   transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  white-space: nowrap;
+  z-index: 2;
 }
 
 .btn-yes:active {
@@ -276,16 +281,20 @@ body {
   background: transparent;
   color: #b0bec5;
   border: 1.5px solid #cfd8dc;
-  padding: 10px 32px;
+  padding: 10px 24px;
   font-size: 14px;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  white-space: nowrap;
+  z-index: 1;
+  line-height: 1.4;
 }
 
 .btn-think:active {
-  transform: scale(0.95);
+  opacity: 0.8;
 }
 
 /* ===== 提示文字 ===== */
@@ -472,26 +481,30 @@ function thinkAgain() {
   thinkCount++;
   var btn = document.getElementById('btnThink');
   var hint = document.getElementById('hint');
+  var card = document.getElementById('mainCard');
 
-  // 按钮每次变大 1.25 倍
-  var scale = Math.pow(1.25, thinkCount);
-  btn.style.transform = 'scale(' + scale + ')';
-
-  // 字体也跟着大
-  var fontSize = 14 * scale;
+  // 每次点击，字体和 padding 实际变大，无上限
+  var fontSize = 14 + thinkCount * 4;
+  var padV = 10 + thinkCount * 3;
+  var padH = 24 + thinkCount * 8;
   btn.style.fontSize = fontSize + 'px';
-  btn.style.padding = (10 * scale) + 'px ' + (32 * scale) + 'px';
+  btn.style.padding = padV + 'px ' + padH + 'px';
+
+  // 按钮颜色逐渐变红（表示"危险"）
+  var r = Math.min(180 + thinkCount * 8, 255);
+  var g = Math.max(190 - thinkCount * 15, 100);
+  var b = Math.max(197 - thinkCount * 15, 100);
+  btn.style.color = 'rgb(' + r + ',' + g + ',' + b + ')';
+  btn.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+  btn.style.borderWidth = Math.min(1.5 + thinkCount * 0.3, 4) + 'px';
+
+  // 卡片自动撑大，允许溢出
+  card.style.overflow = 'visible';
 
   // 显示提示
   var hintIdx = Math.min(thinkCount - 1, hints.length - 1);
   hint.textContent = hints[hintIdx];
   hint.className = 'hint show';
-
-  // 超过 6 次后按钮变得超级大，几乎点不到
-  if (thinkCount >= 8) {
-    btn.style.transform = 'scale(' + Math.pow(1.25, thinkCount) + ')';
-    btn.style.pointerEvents = 'auto'; // 还能点但很难
-  }
 }
 
 // ===== 点击"可以" =====
